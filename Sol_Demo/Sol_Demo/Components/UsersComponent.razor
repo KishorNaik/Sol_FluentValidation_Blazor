@@ -1,0 +1,73 @@
+﻿@page "/adduser"
+
+<h3>Add Users</h3>
+
+<EditForm Model="UserM" OnValidSubmit="SaveCustomer">
+    <FluentValidator TValidator="UserModelValidator"></FluentValidator>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label>First Name:</label>
+                    <InputText id="txtFirstName" placeholder="FirstName" @bind-Value="UserM.FirstName" class="form-control"></InputText>
+                    <ValidationMessage For="@(() => UserM.FirstName)" />
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Last Name:</label>
+                    <InputText id="txtLastName" placeholder="LastName" @bind-Value="UserM.LastName" class="form-control"></InputText>
+                    <ValidationMessage For="@(() => UserM.LastName)" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label>City:</label>
+                    <InputText id="txtCity" placeholder="City" @bind-Value="UserM.UserAddress.City" class="form-control"></InputText>
+                    <ValidationMessage For="@(() => UserM.UserAddress.City)" />
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label>City:</label>
+                    <InputText id="txtPostalCode" placeholder="Postal Code" @bind-Value="UserM.UserAddress.PostalCode" class="form-control"></InputText>
+                    <ValidationMessage For="@(() => UserM.UserAddress.PostalCode)" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button type="submit" class="btn btn-secondary">Submit</button>
+
+                @if (Message != null)
+                {
+                    <h2 style="color:green">@Message</h2>
+                }
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+
+    private UserModel UserM { get; set; }
+
+    private String Message { get; set; }
+
+    protected override void OnInitialized()
+    {
+        UserM = new UserModel();
+        UserM.UserAddress = new UserAddressModel();
+    }
+
+    public void SaveCustomer()
+    {
+        //Console.WriteLine("TODO: Actually do something with the valid data");
+
+        Message = "Save Succesfully";
+    }
+
+}
